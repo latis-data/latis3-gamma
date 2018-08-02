@@ -1,4 +1,4 @@
-#Summary
+# Summary
 
 *LaTiS version 3* is a rewrite of the *Functional Data Model* and *Algebra* based on lessons learned from version 2, and with a bit more inspiration from Functional Programming. It will incubate as *latis3 version 0.x* until we are ready to finalize the API and release it as *latis version 3.x*.
 
@@ -8,7 +8,7 @@ Another distinction of LaTiS 3 is to completely de-couple the model from the dat
 
 The usual collection of *Adapters* and *Writers* are conceptually similar but take better advantage of the new data model implementation. The *Adapter* life cycle, in particular, is much cleaner. This new version of LaTiS will continue to support the same service interface (and more).
 
-#Glossary
+# Glossary
 Items that are capitalized are Scala class names.
 
 * **arity** - The number of un-flattened *DataTypes* in the domain of a function.  
@@ -26,7 +26,7 @@ For example, a function with a domain of (x, y) and wavelength has a dimensional
 * **fdml** - (Functional Datamodel Markup Language) An xml file format to describe the contents of a *Dataset*.  
 See the FDML Schema section below.
 * **Function** - A *Function* is a *DataType* consisting of exactly two *DataType* objects, a domain and a range. Function is a member of the DataType algebraic data type.
-* **functional** **data** **model** - Datsets consist of ordered sequences of samples that are decoupled from metadata.  Operations that implement the functional algebra can be performed on these samples to create new datasets.
+* **functional data model** - Datsets consist of ordered sequences of samples that are decoupled from metadata.  Operations that implement the functional algebra can be performed on these samples to create new datasets.
 * **Metadata** - An instance of *Metadata* is simply a list of key/value pairs to describe a *DataType* or *Dataset*.  Every *Scalar* object is required to contain a *MetaData* object, but *MetaData* objects may be empty for *Tuple* and *Function* objects.
 * **range** - The dependant variables of a function.
 * **Sample** - A *Sample* is no more than the dimensionality of a dataset followed by an array of *Data* objects.  Nested tuples are not allowed in a *Sample* but *ScalarData* and *FunctionData* are.
@@ -34,7 +34,7 @@ See the FDML Schema section below.
 * **Tuple** - A *Tuple* is a *DataType* consisting of a list of *DataType* objects.  Unlike a function, the *Datatype* objects in a *Tuple* are associated but are not dependant on each other.  
 An example is a 2D point consisting of the x,y *Tuple*.  The scalars x and y are associated but x is not a function of y nor is y a function of x. Elements of a *Tuple* also do not have to be of the same type.  Tuple is a member of the *DataType* algebraic data type.
 
-#Design Decisions
+# Design Decisions
 * *DataType* and *Data* objects are completely decoupled:  
   * Con: Trying to maintain two identical tree structures is difficult.
   * Pro: Computation efficiencies require data to be unencumbered with metadata and model concepts. 
@@ -43,7 +43,7 @@ An example is a 2D point consisting of the x,y *Tuple*.  The scalars x and y are
   * Pro: Ensures that at least one Data item is in the *TupleData*.
 * *Sample* objects are not implemented as a tuple of domain and range, as a *Function* is, but are instead implemented as an integer representing dimensionality followed by the domain and range combined into a single list:  
   * Con: The dimensionality number feels  arbitrary.  simply breaking a *Sample* into domain and range would be more elegant.
-  * Pro: Computations perforemed on *Samples* must be efficient.  Extra structure to the data will just slow down the application of functions to the data.
+  * Pro: Computations performed on *Samples* must be efficient.  Extra structure to the data will just slow down the application of functions to the data.
 * Sample objects can contain nested *FunctionData* objects, but not nested *TupleData* objects:  
   * Con: Inconsistency between *TupleData* and *FunctionData*.
   * Pro: The model contains all the information needed to represent nested tuples.
