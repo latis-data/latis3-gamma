@@ -5,9 +5,6 @@ Important decisions are made throughout the evolution of a project that sometime
 * *DataType* and *Data* objects are completely decoupled:  
   * Con: Trying to maintain two identical tree structures is difficult.
   * Pro: Computation efficiencies require data to be unencumbered with metadata and model concepts. 
-* *TupleData* is implemented as a tuple consisting of the first *Data* item and all of the rest:  
-  * Con: Seems arbitrary to require both a single *Data* item followed by a list of additional *Data* items.
-  * Pro: Ensures that at least one Data item is in the *TupleData*.
 * *Sample* objects are not implemented as a tuple of domain and range, as a *Function* is, but are instead implemented as an integer representing dimensionality followed by the domain and range combined into a single list:  
   * Con: The dimensionality number feels arbitrary. Simply breaking a *Sample* into domain and range would be more elegant.
   * Pro: Computations performed on *Samples* must be efficient.  Extra structure to the data will just slow down the application of functions to the data.
