@@ -7,9 +7,9 @@ import scala.util._
  * that can provide an iterator. This is a simple way to memoize
  * FunctionData but it is not generally efficient for evaluation.
  */
-case class SampledFunction(_samples: Iterable[Sample]) extends FunctionData {
+case class SampledFunction(iterableSamples: Iterable[Sample]) extends FunctionData {
   
-  def samples: Iterator[Sample] = _samples.iterator
+  def samples: Iterator[Sample] = iterableSamples.iterator
   
   /**
    * Seek a matching sample taking advantage of the ordering.
