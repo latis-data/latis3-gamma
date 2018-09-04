@@ -6,7 +6,7 @@ import latis.metadata._
  * Define the algebraic data type for the LaTiS implementation of the 
  * Functional Data Model.
  */
-sealed abstract class DataType(metadata: Metadata) extends MetadataLike {
+sealed trait DataType extends MetadataLike {
   
   def id: String = metadata.getProperty("id", "")
 }
@@ -16,7 +16,7 @@ sealed abstract class DataType(metadata: Metadata) extends MetadataLike {
 /**
  * The Scalar type represents a single atomic variable.
  */
-case class Scalar(metadata: Metadata) extends DataType(metadata)
+case class Scalar(metadata: Metadata) extends DataType
 
 object Scalar {
   
@@ -28,7 +28,7 @@ object Scalar {
 /**
  * A Tuple type represents a group of other DataTypes.
  */
-case class Tuple(metadata: Metadata, elements: Seq[DataType]) extends DataType(metadata)
+case class Tuple(metadata: Metadata, elements: Seq[DataType]) extends DataType
 
 object Tuple {
 
@@ -40,7 +40,7 @@ object Tuple {
 /**
  * A Function type represents a functional mapping from the domain type to the range type.
  */
-case class Function(metadata: Metadata, domain: DataType, range: DataType) extends DataType(metadata)
+case class Function(metadata: Metadata, domain: DataType, range: DataType) extends DataType
 
 object Function {
   
